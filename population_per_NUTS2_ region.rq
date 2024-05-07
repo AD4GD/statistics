@@ -38,10 +38,9 @@ WHERE
                sdmx-measure:obsValue     ?pop .
   BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
   ?code1        spatial:PP            ?parent .
-  ?parent      rdfs:label            ?nuts2 .
-  #FILTER (?nuts2 = "DE3 - BERLIN")
+  ?parent      rdfs:label            ?nuts2 .  
   BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
-  #FILTER (?code = ?_nutsCode)
+  FILTER (?code = ?_nutsCode)
 }
 GROUP BY ?nuts2
 ORDER BY ?nuts2
