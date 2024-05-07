@@ -4,10 +4,10 @@
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
-#+   - nutsCode: "DE3"
+#+   - nutsCode: DE3
 #+ transform: {
-#+   "nutsCode": "?nuts2",
-#+   "$anchor": "nutsCode",
+#+   "nuts": "?nuts2",
+#+   "$anchor": "nuts",
 #+   "population": "?population",
 #+ }
 
