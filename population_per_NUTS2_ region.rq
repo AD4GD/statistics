@@ -6,7 +6,7 @@
 #+ defaults:
 #+   - nutsCode: DE3
 #+ transform: {
-#+   "nutsCode": "?_nutsCode",
+#+   "nutsCode": "?nuts2",
 #+   "$anchor": "nutsCode",
 #+   "population": "?population",
 #+ }
