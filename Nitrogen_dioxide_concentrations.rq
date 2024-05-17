@@ -41,7 +41,8 @@ WHERE
                property:geo                     ?ugeo ; # variable
                property:TIME_PERIOD        ?period ; # variable 
                sdmx-measure:obsValue     ?obsValue .
-  BIND (STRBEFORE(STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"),"_CAP") as ?code)
+  BIND (IF (CONTAINS(?ugeo, "_CAP"),STRBEFORE(STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"),"_CAP"),STRBEFORE(STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"),"_V") as ?code)
+  #BIND (STRBEFORE(STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"),"_CAP") as ?code)
   BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",?code)) as ?nuts2) .
   FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
