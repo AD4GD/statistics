@@ -1,11 +1,11 @@
-#+ summary: "Retrieve the total population for a specific NUTS region code (e.g., PL, PL41, LT, NO, or * for all)"
+#+ summary: "Retrieve the total population for a specific NUTS region code (e.g., PL, PL41, LT, NO, or * for all) and/or for specific year <= 2016  (or * for all)"
 #+ description: "NOTE: make sure response content type is application/json"
 #+ endpoint: "https://www.foodie-cloud.org/sparql"
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
 #+   - nutsCode: "DE3"
-#+   - year: "2007"
+#+   - year: "2016"
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
