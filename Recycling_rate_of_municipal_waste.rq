@@ -9,7 +9,7 @@
 #+ transform: {
 #+   "nuts2": "?nuts2",
 #+   "$anchor": "nuts2",
-#+   "year": "year",
+#+   "year": "?year",
 #+   "recyclingRate": "?obsValue",
 #+ }
 
