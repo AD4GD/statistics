@@ -9,7 +9,7 @@
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
-#+   "year": "?date",
+#+   "year": "?year",
 #+   "value": "?population",
 #+ }
 
@@ -28,7 +28,7 @@ PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
  
-SELECT ?nuts2 ?date (SUM(?pop) AS ?population)
+SELECT ?nuts2 ?year (SUM(?pop) AS ?population)
 FROM dataset:demo_r_pjanaggr3.rdf
 FROM nuts:
 WHERE
@@ -45,9 +45,9 @@ WHERE
   BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
   FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
-  #BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
-  BIND (STRDT(CONCAT(?_year,"-01-01"),xsd:dateTime) AS ?date1)
-  FILTER (?_year = "*" || ?date = ?date1)    
+  BIND (STRBEFORE(STR(?date),"-01-01") as ?year)  
+  #BIND (STRDT(CONCAT(?_year,"-01-01"),xsd:dateTime) AS ?date1)
+  FILTER (?_year = "*" || ?_year = ?year)    
   optional {?_year ?p1 ?o1}
 }
 GROUP BY ?nuts2 ?date
