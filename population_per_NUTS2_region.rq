@@ -41,7 +41,7 @@ WHERE
   ?code1        spatial:PP            ?parent .
   ?parent      rdfs:label            ?nuts2 .  
   BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
-  FILTER (?code = ?_nutsCode)
+  FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
 }
 GROUP BY ?nuts2
