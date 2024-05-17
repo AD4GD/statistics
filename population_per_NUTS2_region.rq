@@ -49,8 +49,8 @@ WHERE
   FILTER (?_year = "*" || ?date = ?date1)    
   optional {?_year ?p1 ?o1}
 }
-GROUP BY ?nuts2, ?date
-ORDER BY ?nuts2, ?date
+GROUP BY ?nuts2 ?date
+ORDER BY ?nuts2 ?date
 
 
 
