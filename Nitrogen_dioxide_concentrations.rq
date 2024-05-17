@@ -8,8 +8,8 @@
 #+   - date: "2024-04"
 #+ endpoint_in_url: False
 #+ transform: {
-#+   "nuts2": "?nuts2$anchor",
-#+   "date": "?date$anchor",
+#+   "nuts2": "?nuts2",
+#+   "date": "?date",
 #+   "recyclingRate": "?obsValue",
 #+ }
 
