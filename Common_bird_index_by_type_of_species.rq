@@ -1,0 +1,55 @@
+#+ summary: "Retrieve common bird (all common species) index (index 2000 = 100) by type of species - EU aggregate (EU27_2020) per year for specific year (2006, 2009, 2012, 2015, 2018 or * for all)"
+#+ description: "NOTE: make sure response content type is application/json"
+#+ endpoint: "https://www.foodie-cloud.org/sparql"
+#+ tags: [ "json" ]
+#+ method: "GET"
+#+ defaults:
+#+   - nutsCode: "PL"
+#+   - year: "2018"
+#+ endpoint_in_url: False
+#+ transform: {
+#+   "nuts2": "?nuts2",
+#+   "year": "?year",
+#+   "recyclingRate": "?obsValue",
+#+ }
+
+
+PREFIX  qb:   <http://purl.org/linked-data/cube#>
+PREFIX  sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
+PREFIX  e:    <http://ontologycentral.com/2009/01/eurostat/ns#>
+PREFIX  g:    <http://eurostat.linked-statistics.org/ontologies/geographic.rdf#>
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dataset: <http://eurostat.linked-statistics.org/data/>
+PREFIX nuts: <http://nuts.geovocab.org/>
+PREFIX spatial: <http://geovocab.org/spatial#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
+PREFIX property: <http://eurostat.linked-statistics.org/property#>
+PREFIX unit:    <http://eurostat.linked-statistics.org/dic/unit#>
+PREFIX comspec: <http://eurostat.linked-statistics.org/dic/comspec#>
+PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
+
+SELECT ?nuts2 ?year ?obsValue #(SUM(?pop) AS ?population)
+FROM dataset:estat_sdg_15_60.ttl
+FROM nuts:
+WHERE
+{ 
+?observation  qb:dataSet        dataset:estat_sdg_15_60 ;
+               property:freq                    ?freq ;   
+               property:statinfo       ?statinfo ;         
+               property:unit		       unit:I00 ;
+               property:comspec        comspec:CO_ALL ;
+               property:geo                     ?ugeo ; # variable
+               property:TIME_PERIOD        ?period ; # variable 
+               sdmx-measure:obsValue     ?obsValue .  
+  
+  BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
+  FILTER (?_year = "*" || ?year = ?_year)    
+  optional {?_year ?p1 ?o1}
+}
+#GROUP BY ?nuts2
+ORDER BY ?nuts2
+
+
+
