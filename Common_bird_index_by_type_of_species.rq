@@ -1,10 +1,10 @@
-#+ summary: "Retrieve common bird (all common species) index (index 2000 = 100) by type of species - EU aggregate (EU27_2020) per year for specific year (2006, 2009, 2012, 2015, 2018 or * for all)"
+#+ summary: "Retrieve common bird (all common species) index (index 2000 = 100) by type of species - EU aggregate (EU27_2020) per year for specific year <=2022 (or * for all)"
 #+ description: "NOTE: make sure response content type is application/json"
 #+ endpoint: "https://www.foodie-cloud.org/sparql"
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
-#+   - year: "2018"
+#+   - year: "2022"
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
