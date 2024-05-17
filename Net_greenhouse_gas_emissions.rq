@@ -10,7 +10,7 @@
 #+ transform: {
 #+   "nuts2": "?nuts2",
 #+   "year": "?year",
-#+   "recyclingRate": "?obsValue",
+#+   "value": "?obsValue",
 #+ }
 
 
