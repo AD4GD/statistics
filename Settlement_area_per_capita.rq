@@ -1,4 +1,4 @@
-#+ summary: "Retrieve the settlement area per capita (hab/m2) for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year (2009, 2012, 2015, 2018 or * for all)"
+#+ summary: "Retrieve the settlement area per capita (hab/m2) per year for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year (2009, 2012, 2015, 2018 or * for all)"
 #+ description: "NOTE: make sure response content type is application/json"
 #+ endpoint: "https://www.foodie-cloud.org/sparql"
 #+ tags: [ "json" ]

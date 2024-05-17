@@ -1,4 +1,4 @@
-#+ summary: "Retrieve the total share of buses and trains in inland passenger transport for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year <=2021 (* for all)"
+#+ summary: "Retrieve the total share (%) of buses and trains in inland passenger transport per year for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year <=2021 (* for all)"
 #+ description: "NOTE: make sure response content type is application/json"
 #+ endpoint: "https://www.foodie-cloud.org/sparql"
 #+ tags: [ "json" ]
