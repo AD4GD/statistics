@@ -29,7 +29,7 @@ PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX dic: <http://eurostat.linked-statistics.org/dic/vehicle#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
 
-SELECT ?nuts2 ?date ?obsValue #(SUM(?pop) AS ?population)
+SELECT ?nuts2 ?year ?obsValue #(SUM(?pop) AS ?population)
 FROM dataset:estat_sdg_09_50.ttl
 FROM nuts:
 WHERE
