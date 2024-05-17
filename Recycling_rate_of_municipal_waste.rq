@@ -4,7 +4,7 @@
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
-#+   - nutsCode: PL
+#+   - nutsCode: "PL"
 #+   - year1: "2022"
 #+ endpoint_in_url: False
 #+ transform: {
