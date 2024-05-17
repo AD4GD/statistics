@@ -31,11 +31,11 @@ PREFIX src_crf: <http://eurostat.linked-statistics.org/dic/src_crf#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
 
 SELECT ?nuts2 ?year ?obsValue #(SUM(?pop) AS ?population)
-FROM dataset:estat_sdg_11_52.ttl
+FROM dataset:estat_sdg_13_10.ttl
 FROM nuts:
 WHERE
 { 
-?observation  qb:dataSet        dataset:estat_sdg_11_52 ;
+?observation  qb:dataSet        dataset:estat_sdg_13_10 ;
                property:freq                    ?freq ;
                property:airpol           ?airpol ;
                property:src_crf        src_crf:TOTXMEMONIA ;
