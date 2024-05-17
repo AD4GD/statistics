@@ -5,7 +5,7 @@
 #+ method: "GET"
 #+ defaults:
 #+   - nutsCode: PL
-#+   - year1: 2022
+#+   - year1: "2022"
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
@@ -50,8 +50,8 @@ WHERE
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)
   #IF (?_year != "*", FILTER (?year = ?_year), NOTHING)
   #FILTER (?year = "2019")
-  FILTER (?year = ?_year1_integer)
-  optional {?_year1_integer ?p1 ?o1}
+  FILTER (?year = ?_year1)
+  optional {?_year1 ?p1 ?o1}
 }
 #GROUP BY ?nuts2
 ORDER BY ?nuts2
