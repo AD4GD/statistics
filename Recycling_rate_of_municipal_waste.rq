@@ -43,12 +43,11 @@ WHERE
                sdmx-measure:obsValue     ?obsValue .
   BIND (STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#") as ?code)
   BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",?code)) as ?nuts2) .
-  IF (?_nutsCode != "*", FILTER (?code = ?_nutsCode), NOTHING)
+  FILTER (?_nutsCode != "*" || ?code = ?_nutsCode)  
   #FILTER (?code = "AT")
   #FILTER (?code = ?_nutsCode)
   optional {?_nutsCode ?p ?o}
-  BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)
-  #IF (?_year != "*", FILTER (?year = ?_year), NOTHING)
+  BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
   #FILTER (?year = "2019")
   FILTER (?year = ?_year1)
   optional {?_year1 ?p1 ?o1}
