@@ -9,7 +9,7 @@
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
-#+   "$anchor": "nuts2",
+#+   "year": "?date",
 #+   "value": "?population",
 #+ }
 
