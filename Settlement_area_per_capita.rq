@@ -30,11 +30,11 @@ PREFIX dic: <http://eurostat.linked-statistics.org/dic/vehicle#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
 
 SELECT ?nuts2 ?year ?obsValue #(SUM(?pop) AS ?population)
-FROM dataset:estat_sdg_09_50.ttl
+FROM dataset:estat_sdg_11_31.ttl
 FROM nuts:
 WHERE
 { 
-?observation  qb:dataSet        dataset:estat_sdg_09_50 ;
+?observation  qb:dataSet        dataset:estat_sdg_11_31 ;
                property:freq                    ?freq ;
                property:unit		       ?unit ;                              
                property:geo                     ?ugeo ; # variable
