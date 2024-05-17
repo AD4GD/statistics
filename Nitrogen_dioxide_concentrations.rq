@@ -29,7 +29,7 @@ PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
 
-SELECT ?nuts2 ?year ?obsValue #(SUM(?pop) AS ?population)
+SELECT ?nuts2 ?date ?obsValue #(SUM(?pop) AS ?population)
 FROM dataset:estat_env_air_no2.ttl
 FROM nuts:
 WHERE
