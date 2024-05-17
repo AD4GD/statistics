@@ -50,8 +50,8 @@ WHERE
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)
   #IF (?_year != "*", FILTER (?year = ?_year), NOTHING)
   #FILTER (?year = "2019")
-  FILTER (?year = ?_year_string)
-  optional {?_year_string ?p1 ?o1}
+  FILTER (?year = ?_year_integer)
+  optional {?_year_integer ?p1 ?o1}
 }
 #GROUP BY ?nuts2
 ORDER BY ?nuts2
