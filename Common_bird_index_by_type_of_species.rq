@@ -4,7 +4,6 @@
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
-#+   - nutsCode: "PL"
 #+   - year: "2018"
 #+ endpoint_in_url: False
 #+ transform: {
@@ -43,7 +42,8 @@ WHERE
                property:geo                     ?ugeo ; # variable
                property:TIME_PERIOD        ?period ; # variable 
                sdmx-measure:obsValue     ?obsValue .  
-  
+  BIND (STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#") as ?code)
+  BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",?code)) as ?nuts2) .  
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
   FILTER (?_year = "*" || ?year = ?_year)    
   optional {?_year ?p1 ?o1}
