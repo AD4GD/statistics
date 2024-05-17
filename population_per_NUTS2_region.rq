@@ -4,8 +4,8 @@
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
-#+   - nutsCode: DE3
-#+   - year: 2007
+#+   - nutsCode: "DE3"
+#+   - year: "2007"
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
