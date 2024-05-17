@@ -1,11 +1,11 @@
-#+ summary: "Retrieve total (m2) surface of the terrestrial protected areas per year for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year <=2022 (* for all)"
+#+ summary: "Retrieve total (m2) surface of the terrestrial protected areas per year for a specific NUTS country code (e.g., PL, LT, NO, or * for all) and/or for specific year (2021 or * for all)"
 #+ description: "NOTE: make sure response content type is application/json"
 #+ endpoint: "https://www.foodie-cloud.org/sparql"
 #+ tags: [ "json" ]
 #+ method: "GET"
 #+ defaults:
 #+   - nutsCode: "PL"
-#+   - year: "2022"
+#+   - year: "2021"
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nuts2",
