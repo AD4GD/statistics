@@ -37,7 +37,7 @@ WHERE
                property:sex                     <http://eurostat.linked-statistics.org/dic/sex#F> ;
                property:geo                     ?ugeo ;
                #sdmx-dimension:timePeriod "2007-01-01"^^xsd:dateTime ;
-               property:TIME_PERIOD ?date ;
+               property:TIME_PERIOD ?period ;
                sdmx-measure:obsValue     ?pop .
   BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
   ?code1        spatial:PP            ?parent .
@@ -45,9 +45,11 @@ WHERE
   BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
   FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
-  BIND (STRBEFORE(STR(?date),"-01-01") as ?year)  
-  #BIND (STRDT(CONCAT(?_year,"-01-01"),xsd:dateTime) AS ?date1)
-  FILTER (?_year = "*" || ?_year = ?year)    
+  #BIND (STRBEFORE(STR(?date),"-01-01") as ?year)    
+  #FILTER (?_year = "*" || ?_year = ?year)    
+  #optional {?_year ?p1 ?o1}
+  BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
+  FILTER (?_year = "*" || ?year = ?_year)    
   optional {?_year ?p1 ?o1}
 }
 GROUP BY ?nuts2 ?year
