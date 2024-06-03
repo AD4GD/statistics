@@ -29,15 +29,15 @@ PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
  
 SELECT ?nuts2 ?year (SUM(?pop) AS ?population)
-FROM dataset:estat_demo_r_pjanaggr3.ttl
+FROM dataset:demo_r_pjanaggr3.rdf
 FROM nuts:
 WHERE
-{ ?observation  qb:dataSet        dataset:estat_demo_r_pjanaggr3 ;
+{ ?observation  qb:dataSet        dataset:demo_r_pjanaggr3 ;
                property:age                     <http://eurostat.linked-statistics.org/dic/age#TOTAL> ;
                property:sex                     <http://eurostat.linked-statistics.org/dic/sex#F> ;
                property:geo                     ?ugeo ;
                #sdmx-dimension:timePeriod "2007-01-01"^^xsd:dateTime ;
-               property:TIME_PERIOD ?date ;
+               sdmx-dimension:timePeriod ?date ;
                sdmx-measure:obsValue     ?pop .
   BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
   ?code1        spatial:PP            ?parent .
