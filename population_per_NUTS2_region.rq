@@ -22,6 +22,7 @@ PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX  dataset: <http://eurostat.linked-statistics.org/data/>
 PREFIX nuts: <http://nuts.geovocab.org/>
+PREFIX nuts2024: <http://data.europa.eu/nuts>
 PREFIX spatial: <http://geovocab.org/spatial#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
@@ -30,7 +31,7 @@ PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
  
 SELECT ?nuts2 ?year (SUM(?pop) AS ?population)
 FROM dataset:estat_demo_r_pjanaggr3.ttl
-FROM nuts:
+FROM nuts2024:
 WHERE
 { ?observation  qb:dataSet        dataset:estat_demo_r_pjanaggr3 ;
                property:age                     <http://eurostat.linked-statistics.org/dic/age#TOTAL> ;
@@ -39,10 +40,14 @@ WHERE
                #sdmx-dimension:timePeriod "2007-01-01"^^xsd:dateTime ;
                property:TIME_PERIOD ?period ;
                sdmx-measure:obsValue     ?pop .
-  BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
-  ?code1        spatial:PP            ?parent .
-  ?parent      rdfs:label            ?nuts2 .  
-  BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
+  #BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
+  #?code1        spatial:PP            ?parent .
+  #?parent      rdfs:label            ?nuts2 .  
+  #BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
+  BIND(IRI(CONCAT ("http://data.europa.eu/nuts/code/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
+  ?code1        skos:broader            ?parent .
+  ?parent      skos:prefLabel            ?nuts2 .  
+  BIND (STRAFTER(STR(?parent),"http://data.europa.eu/nuts/code/") as ?code)
   FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
   #BIND (STRBEFORE(STR(?date),"-01-01") as ?year)    
