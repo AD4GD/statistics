@@ -8,7 +8,8 @@
 #+   - year: "2016"
 #+ endpoint_in_url: False
 #+ transform: {
-#+   "nuts2": "?nuts2",
+#+   "nuts2": "?nutsParent",
+#+   "label": "?nuts3",
 #+   "year": "?year",
 #+   "value": "?population",
 #+ }
@@ -29,7 +30,7 @@ PREFIX sdmx-dimension: <http://purl.org/linked-data/sdmx/2009/dimension#>
 PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
  
-SELECT ?nuts2 ?year (SUM(?pop) AS ?population)
+SELECT ?year ?nutsParent (MAX (?nuts2) AS ?nuts3) (SUM(?pop) AS ?population)
 FROM dataset:estat_demo_r_pjanaggr3.ttl
 FROM nuts2024:
 WHERE
@@ -37,22 +38,18 @@ WHERE
                property:age                     <http://eurostat.linked-statistics.org/dic/age#TOTAL> ;
                property:sex                     <http://eurostat.linked-statistics.org/dic/sex#F> ;
                property:geo                     ?ugeo ;
-               #sdmx-dimension:timePeriod "2007-01-01"^^xsd:dateTime ;
                property:TIME_PERIOD ?period ;
                sdmx-measure:obsValue     ?pop .
-  #BIND(IRI(CONCAT ("http://nuts.geovocab.org/id/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
-  #?code1        spatial:PP            ?parent .
-  #?parent      rdfs:label            ?nuts2 .  
-  #BIND (STRAFTER(STR(?parent),"http://nuts.geovocab.org/id/") as ?code)
-  BIND(IRI(CONCAT ("http://data.europa.eu/nuts/code/",STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#"))) as ?code1) .
-  ?code1        skos:broader            ?parent .
-  ?parent      skos:prefLabel            ?nuts2 .  
-  BIND (STRAFTER(STR(?parent),"http://data.europa.eu/nuts/code/") as ?code)
-  FILTER (?_nutsCode = "*" || ?code = ?_nutsCode)    
+  
+  BIND (STRAFTER(STR(?ugeo),"http://eurostat.linked-statistics.org/dic/geo#") as ?nuts1)
+  BIND(IRI(CONCAT ("http://data.europa.eu/nuts/code/",?nuts1)) as ?code1) .
+  BIND (IRI(IF (STRLEN(str(?nuts1))>2, SUBSTR(str(?code1),1,STRLEN(str(?code1))-1),"")) as ?parent)
+  BIND (STRAFTER(STR(?parent),"http://data.europa.eu/nuts/code/") as ?nutsParent)
+  ?parent      skos:prefLabel            ?nuts2 . 
+        
+  FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
   optional {?_nutsCode ?p ?o}
-  #BIND (STRBEFORE(STR(?date),"-01-01") as ?year)    
-  #FILTER (?_year = "*" || ?_year = ?year)    
-  #optional {?_year ?p1 ?o1}
+  
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
   FILTER (?_year = "*" || ?year = ?_year)    
   optional {?_year ?p1 ?o1}
