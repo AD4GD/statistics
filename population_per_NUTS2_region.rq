@@ -52,15 +52,19 @@ WHERE{
   ?parent      skos:prefLabel            ?nuts2 . 
   BIND(CONCAT (?nutsParent," - ",str(?nuts2)) as ?nuts3) .
         
-  FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
-  optional {?_nutsCode ?p ?o}
+  #FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
+  #optional {?_nutsCode ?p ?o}
   
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
-  FILTER (?_year = "*" || ?year = ?_year)    
-  optional {?_year ?p1 ?o1}
+  #FILTER (?_year = "*" || ?year = ?_year)    
+  #optional {?_year ?p1 ?o1}
   }
   GROUP BY ?nuts3 ?nutsParent ?year 
-  }  
+  }
+  FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
+  optional {?_nutsCode ?p ?o}  
+  FILTER (?_year = "*" || ?year = ?_year)    
+  optional {?_year ?p1 ?o1}
 }
 GROUP BY ?nutsParent ?year 
 ORDER BY ?nutsParent ?year 
