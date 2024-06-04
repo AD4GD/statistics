@@ -9,9 +9,9 @@
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nutsParent",
-#+   "label": "?nutsFinal",
+#+   "label": "?nuts3",
 #+   "year": "?year",
-#+   "value": "?populationFinal",
+#+   "value": "?population",
 #+ }
 
 
@@ -31,17 +31,10 @@ PREFIX property: <http://eurostat.linked-statistics.org/property#>
 PREFIX ramon: <http://rdfdata.eionet.europa.eu/ramon/ontology/>
  
 
-SELECT ?year ?nutsParent (MAX (?nuts3) AS ?nutsFinal) (MAX(?population) AS ?populationFinal)
-WHERE{ 
-  FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
-  optional {?_nutsCode ?p ?o}  
-  FILTER (?_year = "*" || ?year = ?_year)    
-  optional {?_year ?p1 ?o1}       
-  {
-  SELECT ?year ?nuts3 ?nutsParent (SUM(?pop) AS ?population)
-  FROM dataset:estat_demo_r_pjanaggr3.ttl
-  FROM nuts2024:
-  WHERE
+SELECT ?year ?nuts3 ?nutsParent (SUM(?pop) AS ?population)
+FROM dataset:estat_demo_r_pjanaggr3.ttl
+FROM nuts2024:
+WHERE
   { ?observation  qb:dataSet        dataset:estat_demo_r_pjanaggr3 ;
                property:age                     <http://eurostat.linked-statistics.org/dic/age#TOTAL> ;
                property:sex                     <http://eurostat.linked-statistics.org/dic/sex#F> ;
@@ -53,22 +46,20 @@ WHERE{
   BIND(IRI(CONCAT ("http://data.europa.eu/nuts/code/",?nuts1)) as ?code1) .
   BIND (IRI(IF (STRLEN(str(?nuts1))>2, SUBSTR(str(?code1),1,STRLEN(str(?code1))-1),"")) as ?parent)
   BIND (STRAFTER(STR(?parent),"http://data.europa.eu/nuts/code/") as ?nutsParent)
-  ?parent      skos:prefLabel            ?nuts2 . 
+  #?parent      skos:prefLabel            ?nuts2 . 
+  ?parent      rdfs:label            ?nuts2 . 
   BIND(CONCAT (?nutsParent," - ",str(?nuts2)) as ?nuts3) .
         
-  #FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
-  #optional {?_nutsCode ?p ?o}
+  FILTER (?_nutsCode = "*" || ?nutsParent = ?_nutsCode)    
+  optional {?_nutsCode ?p ?o}
   
   BIND (STRAFTER(STR(?period),"http://eurostat.linked-statistics.org/dic/TIME_PERIOD#") as ?year)  
-  #FILTER (?_year = "*" || ?year = ?_year)    
-  #optional {?_year ?p1 ?o1}
+  FILTER (?_year = "*" || ?year = ?_year)    
+  optional {?_year ?p1 ?o1}
   }
-  GROUP BY ?nuts3 ?nutsParent ?year 
-  }
+GROUP BY ?nuts3 ?nutsParent ?year 
+ORDER BY ?nuts3 ?nutsParent ?year 
   
-}
-GROUP BY ?nutsParent ?year 
-ORDER BY ?nutsParent ?year 
 
 
 
