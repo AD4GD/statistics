@@ -9,9 +9,9 @@
 #+ endpoint_in_url: False
 #+ transform: {
 #+   "nuts2": "?nutsParent",
-#+   "label": "?nuts3",
+#+   "label": "?nutsFinal",
 #+   "year": "?year",
-#+   "value": "?population",
+#+   "value": "?populationFinal",
 #+ }
 
 
