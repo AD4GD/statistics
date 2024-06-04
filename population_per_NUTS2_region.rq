@@ -8,7 +8,7 @@
 #+   - year: "2016"
 #+ endpoint_in_url: False
 #+ transform: {
-#+   "nuts2": "?nutsParent",
+#+   "nuts2": "?nutsParent$max",
 #+   "label": "?nuts3",
 #+   "year": "?year",
 #+   "value": "?population",
