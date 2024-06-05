@@ -10,7 +10,8 @@
 #+ transform: {
 #+   "year": "?year",
 #+   "$anchor": "year",
-#+   "?nutsParent": "?population",
+#+   "nuts2": "?nutsParent",
+#+   "value": "?population",
 #+ }
 
 
