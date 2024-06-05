@@ -7,11 +7,6 @@
 #+   - nutsCode: "DE3"
 #+   - year: "2016"
 #+ endpoint_in_url: False
-#+ transform: {
-#+   "nuts2": "?nutsParent",
-#+   "$anchor": "nuts2",
-#+   "value": "?population",
-#+ }
 
 
 PREFIX  qb:   <http://purl.org/linked-data/cube#>
