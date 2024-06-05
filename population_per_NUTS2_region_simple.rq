@@ -7,7 +7,13 @@
 #+   - nutsCode: "DE3"
 #+   - year: "2016"
 #+ endpoint_in_url: False
-
+#+ transform: {
+#+   "year": "?year",
+#+   "$anchor": "year",
+#+   "nuts2": "?nutsParent",
+#+   "label": "?nuts3",
+#+   "value": "?population",
+#+ }
 
 PREFIX  qb:   <http://purl.org/linked-data/cube#>
 PREFIX  sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#>
