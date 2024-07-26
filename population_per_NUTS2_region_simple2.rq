@@ -8,7 +8,8 @@
 #+   - year: "2016"
 #+ endpoint_in_url: False
 #+ transform: {
-#+   "label": "?nuts3",
+#+   "nuts": "?nuts3",
+#+   "$anchor": "nuts",
 #+   "value": "?population",
 #+ }
 
